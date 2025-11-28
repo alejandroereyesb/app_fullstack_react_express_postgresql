@@ -14,6 +14,8 @@ const EntryCreate = ({ onEntryCreated }) => {
         const fetchAuthors = async () => {
             try {
                 const data = await getAllAuthors();
+                console.log(data);
+                
                 setAuthors(data);
             } catch (error) {
                 setMessage('Failed to fetch authors. Please try again.');
