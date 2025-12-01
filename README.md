@@ -129,10 +129,37 @@ Esto creará las tablas necesarias y las poblará con datos de ejemplo.
 - **`GET /api/authors`**: Obtiene todos los autores.
 
 ### Variables de entorno necesarias
-Crea un archivo `.env` en la carpeta `backend` con las siguientes variables:
+Crea un archivo `.env` en la carpeta `backend` con las siguientes variables. Recuerda que esto es un ejemplo y lo tienes que guardar con tus datos:
 ```
+# Datos BBDD PostgreSQL
+PG_USER=postgres
+PG_HOST=localhost
+PG_DATABASE=postgres
+PG_PASSWORD=123456
+PG_PORT=5433
+PG_SSL=false
+
+# Servidor
 PORT=3000
-DATABASE_URL=postgresql://usuario:password@host:puerto/database
+# Con docker o en render: NODE_ENV=production
+NODE_ENV=development
+```
+
+Crea un archivo `.env.production` en la carpeta `backend` con las siguientes variables. Este fichero sirve para emular más adelante el sistema fullstack completo utilizando Docker. Recuerda que esto es un ejemplo y lo tienes que guardar con tus datos:
+```
+# Datos BBDD PostgreSQL
+PG_USER=postgres
+# Esta es la IP local de tu ordenador
+PG_HOST=192.168.0.21
+PG_DATABASE=postgres
+PG_PASSWORD=123456
+PG_PORT=5433
+PG_SSL=false
+
+# Servidor
+PORT=3000
+# Con docker o en render: NODE_ENV=production
+NODE_ENV=production
 ```
 
 ### Instalación del backend
@@ -296,7 +323,7 @@ El sistema completo (backend y frontend) está definido en el Dockerfile ubicado
 
 ### **Dockerfile del Sistema Completo**
 
-El Dockerfile del sistema completo está diseñado para crear una imagen ligera y eficiente utilizando Node.js. A continuación, se detalla su contenido y pasos para su uso.
+El Dockerfile del sistema completo está diseñado para crear una imagen ligera y eficiente utilizando Node.js del sistema FullStack completo. A continuación, se detalla su contenido y pasos para su uso.
 
 #### **Código del Dockerfile**
 ```dockerfile
@@ -376,29 +403,21 @@ docker run -p 3000:3000 \
 Para que el sistema funcione correctamente, es necesario configurar las siguientes variables de entorno:
 
 ### **Backend**
-Crea un archivo `.env` en la carpeta `backend` con las siguientes variables:
+Crea un archivo `.env.production` en la carpeta `backend` con las siguientes variables:
 ```env
 PORT=3000
 PG_USER=postgres
 PG_PASSWORD=123456
-PG_HOST=localhost
+# Esta es la IP local de tu ordenador
+PG_HOST=192.168.0.21
 PG_DATABASE=postgres
 PG_PORT=5432
 PG_SSL=false
 ```
 
-### **Sistema Completo**
-Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
+### **Frontend**
+Crea un archivo `.env` en la carpeta Frontend
 ```env
-# Variables del backend
-PORT=3000
-PG_USER=postgres
-PG_PASSWORD=123456
-PG_HOST=localhost
-PG_DATABASE=postgres
-PG_PORT=5432
-PG_SSL=false
-
 # Variables del frontend
 VITE_API_URL=http://localhost:3000/api
 ```
@@ -468,50 +487,3 @@ El archivo `package.json` en la carpeta raíz contiene varios scripts que facili
    ```
    - Inicia el backend y el frontend en modo de desarrollo de manera concurrente.
    - Utiliza `concurrently` para ejecutar los scripts `dev` definidos en los `package.json` de ambas carpetas.
-
-#### **Dependencias**
-
-- **`concurrently`**: Permite ejecutar múltiples comandos de forma simultánea en una sola línea de comando. Es utilizado en los scripts `start` y `dev` para iniciar el backend y el frontend al mismo tiempo.
-
-# Comandos del package.json
-
-Este archivo contiene una lista de scripts que facilitan la gestión del proyecto. A continuación, se explica el propósito de cada comando:
-
-- **install**: Instala las dependencias necesarias tanto para el backend como para el frontend.
-  ```bash
-  npm run install
-  ```
-
-- **start:backend**: Inicia el servidor del backend.
-  ```bash
-  npm run start:backend
-  ```
-
-- **start:frontend**: Construye la aplicación del frontend y luego la inicia.
-  ```bash
-  npm run start:frontend
-  ```
-
-- **start**: Ejecuta tanto el backend como el frontend de manera concurrente.
-  ```bash
-  npm run start
-  ```
-
-- **build**: Construye la aplicación del frontend.
-  ```bash
-  npm run build
-  ```
-
-- **test**: Comando de prueba predeterminado que actualmente no ejecuta ningún test.
-  ```bash
-  npm run test
-  ```
-
-- **dev**: Ejecuta el backend y el frontend en modo de desarrollo de manera concurrente.
-  ```bash
-  npm run dev
-  ```
-
-### Dependencias de desarrollo
-
-- **concurrently**: Permite ejecutar múltiples comandos de npm al mismo tiempo.
