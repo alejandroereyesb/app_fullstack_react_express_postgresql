@@ -1,4 +1,4 @@
-# Proyecto Fullstack con Seeder y Docker
+# App Fullstack con react, express, postgresql, Docker
 
 Este proyecto es una aplicación fullstack que utiliza un backend en Node.js con Express y una base de datos PostgreSQL. El frontend está construido con Vite + React. Todo el sistema está diseñado para facilitar su despliegue y ejecución. Además, la aplicación está dockerizada, con un Dockerfile específico para el backend y otro para el sistema completo.
 
@@ -13,10 +13,14 @@ app_fullstack/
 │   ├── models/       # Modelos de datos
 │   ├── routes/       # Rutas de la API
 │   ├── seeder.js     # Script para inicializar la base de datos
+│   ├── .env          # Entorno de desarrollo
+│   ├── .env.staging  # Entorno de staging
+│   ├── .env.production # Entorno de producción
 │   ├── Dockerfile    # Dockerfile específico para el backend
 │   └── ...
 ├── frontend/         # Código del frontend (Vite)
 │   ├── src/          # Código fuente del frontend
+│   ├── .env          # Variable de entorno de frontend
 │   └── ...
 ├── Dockerfile        # Dockerfile para el sistema completo
 ├── package.json      # Configuración de scripts para el proyecto completo
@@ -41,6 +45,10 @@ app_fullstack/
    npm run dev
    ```
    - Este comando utiliza el script definido en el `package.json` de la raíz para iniciar ambos servicios.
+4. API y web se abren por separado en distintos puertos:
+   - web: http://localhost:5173
+   - api: http://localhost:3000
+
 
 ### **Ejecutar el backend individualmente**
 1. Ve a la carpeta `backend`:
@@ -146,6 +154,8 @@ NOTA: En PG_HOST no puedes usar `localhost` porque entra en conflicto con el con
 
 Para encontrar la IP local de tu ordenador:
  - [what-is-my-local-ip-address](https://www.whatismybrowser.com/detect/what-is-my-local-ip-address/)
+- Consultar IP linux:
+> ip address
 
 - **Production**: Archivo `.env.production` en la carpeta `backend`. Este fichero sirve para emular más adelante el sistema fullstack completo utilizando Docker + BBDD PostgreSQL desplegada en Render:
 ```
@@ -309,7 +319,9 @@ docker run -p 3000:3000 \
   app_fullstack
 ```
 - Este comando utiliza los archivos de variables de entorno específicos para el backend y el frontend.
-- Expone el sistema completo en el puerto `3000`.
+- API y web se abren en mismo puerto:
+   - web: http://localhost:3000/
+   - api: http://localhost:3000/api/entries
 
 
 - **Production** Uso del `.env.production`. Emula el entorno de producción con contenedor Docker en local + datos de BBDD postgreSQL desplegada en la nube (Render)
@@ -320,4 +332,6 @@ docker run -p 3000:3000 \
   app_fullstack
 ```
 - Este comando utiliza los archivos de variables de entorno específicos para el backend y el frontend.
-- Expone el sistema completo en el puerto `3000`.
+- API y web se abren en mismo puerto:
+   - web: http://localhost:3000/
+   - api: http://localhost:3000/api/entries
