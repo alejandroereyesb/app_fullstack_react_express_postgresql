@@ -102,6 +102,24 @@ Esto creará las tablas necesarias y las poblará con datos de ejemplo.
 
 ---
 
+## Ejecutar el Seeder
+
+Para ejecutar el seeder y poblar la base de datos con datos iniciales, sigue estos pasos:
+
+1. Asegúrate de que las dependencias estén instaladas ejecutando:
+   ```bash
+   npm install
+   ```
+
+2. Ejecuta el comando del seeder:
+   ```bash
+   npm run seed
+   ```
+
+Esto ejecutará el script de seed configurado en tu proyecto.
+
+---
+
 ## **Backend**
 
 ### Tecnologías usadas
@@ -421,19 +439,6 @@ Crea un archivo `.env` en la carpeta Frontend
 # Variables del frontend
 VITE_API_URL=http://localhost:3000/api
 ```
-
----
-
-## **Notas Adicionales**
-
-- Asegúrate de que las variables de entorno estén configuradas correctamente en los archivos `.env`.
-- Usa rutas relativas (`/api`) para evitar problemas con las URLs en diferentes entornos.
-- Verifica los logs del backend y frontend para solucionar problemas.
-- Asegúrate de que las variables de entorno estén configuradas correctamente antes de construir las imágenes.
-- Usa rutas relativas (`/api`) para evitar problemas con las URLs en diferentes entornos.
-- Verifica los logs de los contenedores para solucionar problemas.
-
----
 
 ## **Comandos del package.json en la carpeta raíz**
 

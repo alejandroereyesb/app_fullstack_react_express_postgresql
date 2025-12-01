@@ -4,6 +4,10 @@ const { createAuthor, getAuthorByEmail } = require("./models/authors.model");
 
 const seedDatabase = async () => {
   try {
+    // borrar las tablas si existen
+    await pool.query('DROP TABLE IF EXISTS authors CASCADE');
+    await pool.query('DROP TABLE IF EXISTS entries CASCADE');
+
     // Crear tabla authors
     await pool.query(`
       CREATE TABLE IF NOT EXISTS authors (
@@ -72,14 +76,6 @@ const seedDatabase = async () => {
       email: "alvaru@thebridgeschool.es",
       category: "Ciencia"
     });
-
-    // // Insertar datos en authors
-    // await createAuthor("Author 1", "surname 1", "author1@example.com", "https://example.com/image1.jpg");
-    // await createAuthor("Author 2", "surname 2", "author2@example.com", "https://example.com/image2.jpg");
-
-    // // Insertar datos en entries
-    // await createEntry("Entry 1", "Content of Entry 1", 1);
-    // await createEntry("Entry 2", "Content of Entry 2", 2);
 
     console.log("Database seeded successfully.");
   } catch (error) {
